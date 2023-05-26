@@ -45,29 +45,67 @@ NamesAPI.online allows you to predict the gender associated with a given name. B
 
 ## Usage/Examples
 
+namesAPI.py
+
 ```python
 import requests
-import json
 
-url = 'https://namesapi.online/api'
-api_key = '<API_KEY>'
-name = 'Ahmed'
+class NamesAPI:
+    def __init__(self):
+        self.api_url = 'https://namesapi.online/api'
+        self.api_key = self.get_api_key()
 
-data = {
-    'name': name
-}
+    def get_api_key(self):
+        # Importer la clé d'API depuis le fichier de configuration
+        from config import api_key
+        return api_key
 
-headers = {
-    'Content-Type': 'application/json',
-    'API-Key': api_key
-}
+    def get_gender(self, name):
+        url = f'{self.api_url}/gender'
+        headers = {
+            'Content-Type': 'application/json',
+            'API-Key': self.api_key
+        }
+        data = {
+            'name': name
+        }
 
-response = requests.post(url, headers=headers, json=data)
-response_data = response.json()
+        response = requests.post(url, headers=headers, json=data)
+        response_data = response.json()
 
-print(response_data)
+        return response_data
+
 
 # {"gender":"m","name":"ahmed","probability":1.0}
 
 ```
+
+config.py
+
+```python
+api_key = 'YOUR_API_KEY'  # You have to replace this with your API key !
+```
+
+example.py - How to get the gender and the probabiity
+
+```python
+from NamesAPI import NamesAPI
+
+# Create an instance of the NamesAPI class
+namesAPI = NamesAPI()
+
+# Use the getGender method to get the gender and probability of a name
+name = 'Ahmed'
+result = namesAPI.getGender(name)
+
+# Display the result
+print('Name:', name)
+print('Gender:', result['gender'])
+print('Probability:', result['probability'])
+
+
+# {"gender":"m","name":"ahmed","probability":1.0}
+```
+
+
 
