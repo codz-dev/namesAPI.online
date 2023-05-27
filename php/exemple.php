@@ -8,8 +8,11 @@ $namesAPI = new NamesAPI();
 $name = 'Ahmed';
 $result = $namesAPI->getGender($name);
 
-// Display the result
-echo 'Name: ' . $name . '<br>';
-echo 'Gender: ' . $result['gender'] . '<br>';
-echo 'Probability: ' . $result['probability'] . '<br>';
+    if (isset($result['gender']) && isset($result['probability'])) {
+        echo 'Gender: ' . $result['gender'] . '<br>';
+        echo 'Probability: ' . $result['probability'] . '<br>';
+    } else {
+        echo 'Error: ' . $result['error'] . '<br>';
+    }
+
 ?>
