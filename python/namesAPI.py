@@ -11,7 +11,7 @@ class NamesAPI:
         return api_key
 
     def get_gender(self, name):
-        url = f'{self.api_url}/gender'
+        url = f'{self.api_url}'
         headers = {
             'Content-Type': 'application/json',
             'API-Key': self.api_key
