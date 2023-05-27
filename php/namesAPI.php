@@ -17,7 +17,7 @@ class NamesAPI {
     }
     
     public function getGender($name) {
-        $url = $this->apiUrl . '/api';
+        $url = $this->apiUrl;
         
         $data = [
             'name' => $name
