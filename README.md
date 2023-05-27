@@ -79,8 +79,6 @@ class NamesAPI:
 
         return response_data
       
-# {"gender":"m","name":"ahmed","probability":1.0}
-
 ```
 
 config.py
@@ -92,22 +90,21 @@ api_key = 'YOUR_API_KEY'  # You have to replace this with your API key !
 example.py - How to get the gender and the probabiity
 
 ```python
-from NamesAPI import NamesAPI
+from namesAPI import NamesAPI
 
 # Create an instance of the NamesAPI class
 namesAPI = NamesAPI()
 
 # Use the getGender method to get the gender and probability of a name
-name = 'Ahmed'
+name = 'Achour'
 result = namesAPI.getGender(name)
+try:
+    print('Gender:', result['gender'])
+    print('Probability:', result['probability'])
+except KeyError:
+    print('Error:', result['error'])
 
-# Display the result
-print('Name:', name)
-print('Gender:', result['gender'])
-print('Probability:', result['probability'])
-
-
-# {"gender":"m","name":"ahmed","probability":1.0}
+# {"gender":"m","name":"achour","probability":1.0}
 ```
 
 
