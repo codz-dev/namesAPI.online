@@ -11,7 +11,7 @@ class NamesAPI {
     const url = `${this.api_url}`;
     const headers = {
       'Content-Type': 'application/json',
-      'API-Key': this.api_key
+      'X-API-Key': this.api_key
     };
     const data = {
       name: name
