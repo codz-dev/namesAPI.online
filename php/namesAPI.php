@@ -25,7 +25,7 @@ class NamesAPI {
         
         $headers = [
             'Content-Type: application/json',
-            'API-Key: ' . $this->config['api_key']
+            'X-API-Key: ' . $this->config['api_key']
         ];
         
         $ch = curl_init();
@@ -40,17 +40,15 @@ class NamesAPI {
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         
         curl_close($ch);
-        
+        $result = json_decode($response, true);
         if ($httpCode === 200) {
-            $result = json_decode($response, true);
             return [
                 'gender' => $result['gender'],
                 'probability' => $result['probability']
             ];
         } else {
             return [
-                'gender' => 'Unknown',
-                'probability' => null
+                'error' => $result['error']
             ];
         }
     }
